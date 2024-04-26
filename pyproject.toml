@@ -1,0 +1,16 @@
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core>=1.0.0"]
+
+[tool]
+[tool.poetry]
+authors = ["NafisHandoko <<>>"]
+description = ""
+name = "depr-calc"
+version = "0.1.0"
+[tool.poetry.dependencies]
+Flask = "^2.0.2"
+pandas = "^1.3.4"
+python = "^3.8"
+sklearn = "^0.0"
+[tool.poetry.dev-dependencies]

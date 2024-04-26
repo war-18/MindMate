@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MindMate - Therapists</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-image: url("https://w0.peakpx.com/wallpaper/565/511/HD-wallpaper-mind-your-mental-health-nature-other-entertainment-people.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      h1 {
+        color: white;
+        text-align: center;
+        margin-bottom: 30px;
+        text-shadow: 2px 2px 4px rgba(255, 255, 0, 255);
+      }
+
+      #searchContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 30px;
+      }
+
+      #searchInput {
+        width: 300px;
+        padding: 10px;
+        border: none;
+        border-radius: 20px;
+        margin-bottom: 20px;
+        font-size: 16px;
+        text-align: center;
+      }
+
+      .therapist-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .therapist {
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        width: 250px;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .therapist:hover {
+        transform: translateY(-45px);
+      }
+
+      .therapist img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        margin-bottom: 10px;
+        border: 3px solid white;
+      }
+
+      .therapist h2 {
+        color: #333;
+        font-size: 1.5em;
+        margin-bottom: 5px;
+      }
+
+      .therapist p {
+        margin-top: 5px;
+        color: #555;
+        font-size: 1em;
+      }
+
+      /* Added border style */
+      #findTherapists {
+        border: 2px solid white;
+        padding: 10px 20px;
+        border-radius: 20px;
+      }
+
+      .map-logo {
+        width: 20px;
+        vertical-align: middle;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Find Therapists</h1>
+
+    <div id="searchContainer">
+      <input type="text" id="searchInput" placeholder="Search by location" />
+    </div>
+
+    <div class="therapist-container" id="therapistContainer">
+      {% for therapist in therapists %}
+      <div class="therapist" data-location="{{ therapist.location }}">
+        <img src="{{ therapist.photo }}" alt="{{ therapist.name }}" />
+        <h2>{{ therapist.name }}</h2>
+        <p><strong>Location:</strong> {{ therapist.location }}</p>
+        <p><strong>Specialty:</strong> {{ therapist.specialty }}</p>
+        <a
+          href="https://www.openstreetmap.org/search?query={{ therapist.location }}"
+          target="_blank"
+        >
+          <img
+            src="https://w7.pngwing.com/pngs/200/830/png-transparent-google-map-logo-google-maps-navigation-location-text-logo-sign.png"
+            alt="Map"
+            style="width: 30px; height: 30px"
+          />
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+
+    <script>
+      document
+        .getElementById("searchInput")
+        .addEventListener("input", function () {
+          var searchTerm = this.value.toLowerCase();
+          var therapists = document.querySelectorAll(".therapist");
+
+          therapists.forEach(function (therapist) {
+            var location = therapist.dataset.location.toLowerCase();
+            if (location.includes(searchTerm)) {
+              therapist.style.display = "block";
+            } else {
+              therapist.style.display = "none";
+            }
+          });
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mood Videos</title>
+    <style>
+      /* Inline CSS for simplicity, you can move this to a separate CSS file */
+      body {
+        font-family: Arial, sans-serif;
+        background-image: url("https://i.pinimg.com/736x/27/32/48/2732485255fea1e4da269915cf1b2465.jpg");
+        background-size: cover;
+        background-position: center;
+        margin: 0;
+        padding: 0;
+        color: #fff; /* Set text color to white */
+      }
+      h1 {
+        text-align: center;
+        margin-top: 50px;
+        color: #fff; /* Set text color to white */
+      }
+      h2 {
+        text-align: center;
+        margin-top: 20px;
+        color: #fff; /* Set text color to white */
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0 auto;
+        width: 80%;
+        max-width: 800px;
+      }
+      li {
+        background-color: rgba(
+          255,
+          255,
+          255,
+          0.1
+        ); /* Semi-transparent white background for readability */
+        border-radius: 10px;
+        margin-bottom: 20px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+      li:hover {
+        transform: translateY(-5px);
+      }
+      iframe {
+        width: 100%;
+      }
+      p {
+        text-align: center;
+        color: #fff; /* Set text color to white */
+      }
+      .search-container {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      input[type="text"] {
+        width: 60%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 2px solid #fff; /* Set border color to white */
+        border-radius: 4px;
+        outline: none;
+        font-size: 16px;
+        color: #fff; /* Set text color to white */
+        background-color: rgba(
+          255,
+          255,
+          255,
+          0.2
+        ); /* Semi-transparent white background for readability */
+      }
+      input[type="text"]::placeholder {
+        color: #fff; /* Set placeholder text color to white */
+      }
+      input[type="submit"] {
+        background-color: #4caf50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      input[type="submit"]:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Mood Videos</h1>
+    <div class="search-container">
+      <form action="/videos" method="get">
+        <input type="text" placeholder="Enter mood..." name="q" required />
+        <input type="submit" value="Search" />
+      </form>
+    </div>
+    <ul>
+      {% if mood %}
+      <h2>{{ mood }} Videos</h2>
+      {% for video in videos %}
+      <li>
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/{{ video['id'] }}"
+          frameborder="0"
+          allowfullscreen
+        ></iframe>
+        <p>{{ video['title'] }}</p>
+      </li>
+      {% endfor %} {% endif %}
+    </ul>
+  </body>
+</html>

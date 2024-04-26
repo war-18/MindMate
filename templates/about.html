@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MindMate - About</title>
+  <style>
+    /* General styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url("https://thedailyguardian.com/wp-content/uploads/2020/09/Mental-health.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      color: white;
+    }
+
+    /* Navbar styles */
+    .navbar {
+      background-color: #333;
+      padding: 10px 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .navbar-brand {
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .navbar-menu {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar-menu li {
+      margin-left: 20px;
+      position: relative;
+    }
+
+    .navbar-menu a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 15px;
+      display: block;
+    }
+
+    .navbar-menu .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #333;
+      min-width: 200px;
+      z-index: 1000;
+    }
+
+    .navbar-menu .dropdown-content a {
+      color: white;
+      padding: 10px 15px;
+      display: block;
+      text-decoration: none;
+    }
+
+    .navbar-menu .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Container styles */
+    .container {
+      max-width: 800px;
+      margin: 150px auto;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.7);
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    /* Heading styles */
+    h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    p {
+      font-size: 20px;
+      margin-bottom: 30px;
+    }
+
+    /* Button styles */
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 10px;
+      background-color: #4caf50;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 20px;
+      transition: background-color 0.3s;
+    }
+
+    .button:hover {
+      background-color: #45a049;
+    }
+
+    /* Footer styles */
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+<div class="navbar">
+    <div class="navbar-container">
+      <a href="/" class="navbar-brand">MindMate</a>
+      <ul class="navbar-menu">
+        <li class="dropdown">
+          <a href="#" class="nav-link">Services</a>
+          <div class="dropdown-content">
+            <a href="/chatbot">Chat with MindMate</a>
+            <a href="/depression_calculator">Take the Quiz</a>
+            <a href="/music">Free with music</a>
+            <a href="/indexofsucide">Suicide Analysis</a>
+            <a href="/therapists">Therapists</a>
+            <a href="/videos">Motivate</a>
+          </div>
+        </li>
+        <li><a href="/about" class="nav-link">About</a></li>
+        <li><a href="/team" class="nav-link">Team</a></li>
+        <li><a href="/contact" class="nav-link">Contact Us</a></li>
+      </ul>
+    </div>
+  </div>
+  
+
+  <!-- About Content -->
+  <div class="container">
+    <h1>About MindMate</h1>
+    <p>Discover MindMate, your comprehensive mental health companion. Our platform utilizes cutting-edge technology to provide advanced mental health detection and personalized recommendations tailored to your needs.</p>
+    <p>Engage with our diverse range of services:</p>
+    <a href="/chatbot" class="button">Chat with MindMate</a>
+    <a href="/depression_calculator" class="button">Take the Quiz</a>
+    <a href="/music" class="button">Free with Music</a>
+    <a href="/indexofsucide" class="button">Suicide Analysis</a>
+    <a href="/therapists" class="button">Therapists</a>
+    <a href="/videos" class="button">Motivate</a>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 MindMate. All rights reserved.</p>
+  </footer>
+</body>
+</html>

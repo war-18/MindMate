@@ -1,0 +1,23 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+input[type="text"], button {
+    padding: 10px;
+    font-size: 16px;
+}
+
+#searchResults {
+    margin-top: 20px;
+}
+
+.therapist {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+a {
+    display: block;
+    margin-top: 20px;
+}

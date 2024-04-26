@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>MindMate - Music Player</title>
+    <meta name="description" content="MINDMATE : Music Player is an Ad-Free Music Player, High Quality MP3 Songs with Metadata support, and a Modern Design. A large library of songs.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
+    <style>
+        .fit-content {
+  width: fit-content;
+  width: -moz-fit-content;
+}
+
+#audio-player {
+  right: 0px;
+  left: 0px;
+  position: fixed;
+  bottom: 0px;
+  padding: 20px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.song-image {
+  width: 110px;border-top-left-radius: 30px;height: 114px;
+}
+.song-text {
+  margin: 0px;color: rgb(172,248,159);max-width: 100%;
+}
+.song-container {
+  margin-bottom: 20px;border-bottom-right-radius: 30px;border: 2px solid var(--gray);border-bottom-style: solid;border-top-left-radius: 30px;
+}
+audio::-webkit-media-controls-panel {
+  background-color: #ff9f44af;
+}
+
+a.nav-link {
+  color: #f58723;
+}
+
+.footer-basic {
+  padding: 40px 0;
+  background-color: #ffffff;
+  color: #4b4c4d;
+}
+
+.header-dark {
+  background-size: cover;
+}
+
+.header-dark h1 {
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 40px;
+  padding-top: 60px;
+}
+
+/* Highlight Clean */
+.highlight-clean {
+  color: #313437;
+  background-color: #fff;
+  padding: 50px 0;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.highlight-clean p {
+  color: #7d8285;
+}
+
+.highlight-clean h2 {
+  font-weight: bold;
+  margin-bottom: 25px;
+  line-height: 1.5;
+  padding-top: 0;
+  margin-top: 0;
+  color: inherit;
+}
+
+.highlight-clean .intro {
+  font-size: 16px;
+  max-width: 500px;
+  margin: 0 auto 25px;
+}
+
+.highlight-clean .buttons {
+  text-align: center;
+}
+
+.highlight-clean .buttons .btn {
+  padding: 16px 32px;
+  margin: 6px;
+  border: none;
+  background: none;
+  box-shadow: none;
+  text-shadow: none;
+  opacity: 0.9;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 13px;
+  letter-spacing: 0.4px;
+  line-height: 1;
+  outline: none;
+  background-color: #ddd;
+}
+
+.highlight-clean .buttons .btn:hover {
+  opacity: 1;
+}
+
+.highlight-clean .buttons .btn:active {
+  transform: translateY(1px);
+}
+
+.highlight-clean .buttons .btn-primary {
+  background-color: #055ada;
+  color: #fff;
+}
+
+.text-center {
+  margin: 10px 0 15px;
+}
+
+#saavn-bitrate {
+  background-color: #1c1c1c;
+  color: #fff;
+  border: 0;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+footer {
+  color: rgba(255, 255, 255, 0.753);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+}
+.error {
+ margin : 20px;
+}
+    </style>
+</head>
+
+<body style="padding-bottom: 50px;background: rgb(0,0,0);">
+    <header class="header-dark" style="color: rgb(205,205,205);padding: 0px 0px 10px;">
+        <nav class="navbar navbar-dark navbar-expand-lg navigation-clean-search">
+            <div class="container"><a class="navbar-brand" href="#">MINDMATE : Music Player</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navcol-1">
+                    
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <h1 class="text-center" style="margin: 0px;">MINDMATE : Music Player</h1>
+                    <h3 class="text-center" style="color: rgba(249,255,255,0.81);font-family: Bitter, serif;">Music Player</h3>
+                    <!-- <p class="text-center" style="padding: 0px 5px;">Ad-Free, Metadata, &amp; Modern Design</p> -->
+                </div>
+            </div>
+        </div>
+        
+    </header>
+    <div>
+        <div class="tab-content">
+            <div class="tab-pane active" role="tabpanel" id="tab-1">
+                <section class="highlight-clean" style="background: #000; color: rgb(249,249,249);padding-top: 20px;">
+                    <div class="text-center">
+                        <select id="saavn-bitrate">
+                            <option value="4">320kbps</option>
+                            <option value="3" selected="">160kbps</option>
+                            <option value="2">96kbps</option>
+                            <option value="1">48kbps</option>
+                        </select></div>
+                    <p class="text-center" style="padding: 0px 5px;"></p>
+                    <div class="container" style="padding: 0px;">
+                        <div class="intro">
+                            <form class="text-center" action="#" method="get">
+                                <div style="width: 95%;margin: auto;padding: 3px;" placeholder="Enter Song, Artist or Album name"><input class="form-control float-left fit-content" type="text" id="saavn-search-box" style="margin: 0px;color: var(--gray-dark);max-width: 100%;width: 75%;" placeholder="Enter Name, Year, Artist"><button class="btn btn-primary" id="saavn-search-trigger" type="submit" style="text-align: center;" onclick="SaavnSearch()">Search</button></div>
+                                <h5 class="text-uppercase text-center" style="color: rgb(165,255,184);">Results</h5>
+                            </form>
+                        </div>
+                            <div id="saavn-results" style="margin-bottom: 20px;">
+                                <h5>Featured</h5>
+                            </div>
+                            <div class="text-center" style="width:100%"><button id="loadmore" style="width: 100%;">Load More</button></div>
+                            <div class="button-container">
+                            </div>
+                            <script>
+                                const buttonTitles = ['2023','English Songs','Edward Maya','Zack Knight','Akcent','Arijit Singh','Enrique Iglesias','Pitbull','Imran Khan', 'DJ Snake', 'Darshan Raval', 'Jubin Nautiyal', 'Armaan Malik', 'Old Songs',"Adele","Billie Eilish","Imagine Dragons","Ed Sheeran","Neha Kakkar", "Badshah", "Atif Aslam", "Guru Randhawa", "Shreya Ghoshal", "Tony Kakkar", "Harrdy Sandhu", "Armaan Malik", "Diljit Dosanjh", "Sonu Nigam", "Vishal Dadlani", "Kanika Kapoor", "Sukhwinder Singh", "Sunidhi Chauhan", "Mika Singh", "Shaan", "Mohit Chauhan", "Pritam", "KK", "Yo Yo Honey Singh","Taylor Swift","Sia","Radioactive","Halsey","The Chainsmokers","Drake","Justin Bieber","Beyonce","The Weeknd","Rihanna","Lady Gaga","AC/DC","Michael Jackson","The Rolling Stones"];
+                                const buttonContainer = document.querySelector('.button-container');
+
+                                buttonTitles.forEach(title => {
+                                const button = document.createElement('button');
+                                button.classList.add('search-toggle');
+                                button.textContent = title;
+                                button.setAttribute('onclick', `doSaavnSearch('${title}')`);
+                                buttonContainer.appendChild(button);
+                                });
+                            </script>
+                   
+                      
+                        <div style="padding-bottom: 40px;">
+
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <div id="audio-player" style="z-index: 99;background: #ffffff33; width: 100%;margin: 0px;color: var(--light);backdrop-filter: blur(4px);border-top-left-radius: 10px;border-top-right-radius: 20px;">
+        <div class="row" style="margin: 0px;">
+            <div class="col-auto fit-content" style="padding: 0px;">
+                <img class="img-fluid d-inline" id="player-image" style="height: 75px;width: 75px;border-radius: 10px;" src="https://i.pinimg.com/originals/ed/54/d2/ed54d2fa700d36d4f2671e1be84651df.jpg" loading="lazy">
+            </div>
+            <div class="col fit-content" style="padding: 0px;">
+                <div style="max-height: 24px;max-width: 95%;word-wrap: normal; padding-left: 20px;"><span id="player-name">Song</span><span><br></span><span id="player-album">Album</span></div><br>
+                <audio id="player" controls="controls" controlsList="nodownload" style="width: 100%;height: 30px; padding-left: 20px; padding-top:5px;">
+                    <source id="audioSource" src=""></source>
+                    Your browser does not support the audio format.
+                </audio>
+            </div>
+        </div>
+    </div>
+    <!-- floating downloader popup -->
+    <div class=”float-button” style="width:30px; height:30px; border-radius:50%; background-color:#fff; box-shadow: 0 0 10px #000; cursor:pointer; position:fixed;top:50px; right:20px; z-index:9999;">
+    <!-- download icon -->
+    <a href="javascript:void(0);" class="btn btn-primary" id="mpopupLink">
+    <img src="https://img.icons8.com/ios/50/000000/download.png">
+    </a></div>
+    <style>
+                                
+        #saavn-results{
+        display: flex;
+        flex-wrap: wrap;
+        }
+        /* Three columns on desktop */
+        @media screen and (min-width: 992px) {
+        .song-container {
+            width: calc(33.33% - 20px);
+            margin: 0 10px 20px 10px;
+        }
+        }
+
+        /* Two columns on desktop */
+        @media screen and (min-width: 768px) and (max-width: 991px) {
+        .song-container {
+            width: calc(50% - 20px);
+            margin: 0 10px 20px 10px;
+        }
+        }
+
+        /* One column on mobile */
+        @media screen and (max-width: 767px) {
+        .song-container {
+            width: calc(100% - 20px);
+            margin: 0 10px 20px 10px;
+        }
+        }
+        .search-toggle-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        width: 95%;
+        margin: 0 auto;
+        }
+        .search-toggle {
+        background: rgba(0, 0, 0, 0.1);
+        color: #fff;
+        font-size: 18px;
+        font-family: Aclonica, sans-serif;
+        padding: 6px;
+        border-style: none;
+        }
+        .search-toggle:nth-child(10n+1){color:#ceea82}.search-toggle:nth-child(10n+2){color:#70cee2}.search-toggle:nth-child(10n+3){color:#ef2b2d}.search-toggle:nth-child(10n+4){color:#23b805}.search-toggle:nth-child(10n+5){color:var(--primary)}.search-toggle:nth-child(10n+6){color:#cee007}.search-toggle:nth-child(10n+7){color:#ff77a8}.search-toggle:nth-child(10n+8){color:#21a9af}.search-toggle:nth-child(10n+9){color:var(--warning)}.search-toggle:nth-child(10n+10){color:#e316e7}
+    </style>
+    <style>
+        .mpopup {
+            position: fixed;
+            overflow: auto;
+            overflow-x: hidden;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            width: auto;
+            height: auto;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            display: none;
+        }
+        ul.nobullets {
+  list-style-type: none; /* Remove bullets */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margins */
+}
+    </style>
+    <!-- Modal popup box -->
+<div id="mpopupBox" class="mpopup">
+    <!-- Modal content -->
+    <div class="modal-content">
+    
+        <div class="modal-header" style="display:inline;">
+            <span class="close">×</span>
+            <h2>Downloads</h2>
+        </div>
+        <div class="modal-body">
+            <!-- list of songs, with a small cover art pic, name, album name -->
+            <row>
+            <ul id="download-list" class="nobullets">
+                    <!--<li>
+                    <div class="col">
+                        
+                        <img id="download-cover" src="https://i.pinimg.com/originals/ed/54/d2/ed54d2fa700d36d4f2671e1be84651df.jpg" width="50px">
+                        <div style="display: inline;">
+                        <span id="download-name">Song</span>
+                        <span id="download-album">Album</span>
+                        <br>
+                        <span id="download-size">Size</span>
+                        <span id="download-status" style="color:green">Compiling.</span>
+                        </div>
+                    </div>
+                    <hr>
+                    </li>-->
+                    
+
+
+                
+                </ul></row>
+        </div>
+        <div class="modal-footer" style="text-align: center;">
+            <p>Don't flood the Media Server, Have patience...</p>
+        </div>
+    
+    </div>
+</div>
+<script>
+    // Select modal
+    var mpopup = document.getElementById('mpopupBox');
+    
+    // Select trigger link
+    var mpLink = document.getElementById("mpopupLink");
+    
+    // Select close action element
+    var close = document.getElementsByClassName("close")[0];
+    
+    // Open modal once the link is clicked
+    mpLink.onclick = function() {
+        mpopup.style.display = "block";
+    };
+    
+    // Close modal once close element is clicked
+    close.onclick = function() {
+        mpopup.style.display = "none";
+    };
+    
+    // Close modal when user clicks outside of the modal box
+    window.onclick = function(event) {
+        if (event.target == mpopup) {
+            mpopup.style.display = "none";
+        }
+    };
+    </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.1/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/functions.js"></script>
+    <script>
+        function PlayAudio(audio_url, song_id) {
+    
+    var audio = document.getElementById('player');
+    var source = document.getElementById('audioSource');
+    source.src = audio_url;
+    var name = document.getElementById(song_id+"-n").textContent;
+    var album = document.getElementById(song_id+"-a").textContent;
+    var image = document.getElementById(song_id+"-i").getAttribute("src");
+      
+  document.title = name+" - "+album;
+  var bitrate = document.getElementById('saavn-bitrate');
+  var bitrate_i = bitrate.options[bitrate.selectedIndex].value;
+  var quality = "";
+  if (bitrate_i == 4) {quality = 320} else {quality = 160;}
+  
+  
+      document.getElementById("player-name").innerHTML = name;
+          document.getElementById("player-album").innerHTML = album;
+  document.getElementById("player-image").setAttribute("src",image);
+  
+  var promise = audio.load();
+  if (promise) {
+      //Older browsers may not return a promise, according to the MDN website
+      promise.catch(function(error) { console.error(error); });
+  }//call this to just preload the audio without playing
+    audio.play(); //call this to play the song right away
+  };
+  function searchSong(search_term) {
+      
+  document.getElementById('search-box').value=search_term;
+  var goButton = document.getElementById("search-trigger");
+              goButton.click();
+      
+  }
+  var DOWNLOAD_API = "https://saadhna-mp3-server.mrdoggo11.repl.co"
+  function AddDownload(id) {
+      var bitrate = document.getElementById('saavn-bitrate');
+      var bitrate_i = bitrate.options[bitrate.selectedIndex].value;
+      // MP3 server API
+      var MP3DL = DOWNLOAD_API+"/add?id="+id;
+      // make api call, if 200, add to download list
+      fetch(MP3DL)
+      .then(response => response.json())
+      .then(data => {
+          if (data.status == "success") {
+              // add to download list
+              var download_list = document.getElementById("download-list");
+              var download_item = document.createElement("li");
+             /*
+             <li>
+                      <div class="col">
+                          
+                          <img src="https://i.pinimg.com/originals/ed/54/d2/ed54d2fa700d36d4f2671e1be84651df.jpg" width="50px">
+                          <div style="display: inline;">
+                          <span id="download-name">Song</span>
+                          <span id="download-album">Album</span>
+                          <br>
+                          <span id="download-size">Size</span>
+                          <span id="download-status" style="color:green">Compiling.</span>
+                          </div>
+                      </div>
+                      <hr>
+                      </li>
+             */
+              // download_item.innerHTML = '<div class="col"><img src="'+data.image+'" width="50px"><div style="display: inline;"><span id="download-name">'+id+'</span><span id="download-album">'+data.album+'</span><br><span id="download-size">'+data.size+'</span><span id="download-status" style="color:green">Compiling.</span></div></div><hr>';
+              download_item.innerHTML = `
+              <div class="col">
+              <img class="track-img" src="${data.image}" width="50px">
+              <div style="display: inline;">
+                <span class="track-name"> ${id}</span> - 
+                <span class="track-album"> ${data.album}</span>
+                <br>
+                <span class="track-size"> Size : Null</span>
+                <span class="track-status" style="color:green"> </span>
+              </div>
+            </div>
+            <hr>
+              `;
+  
+              // set download_item track_tag to song id
+              download_item.setAttribute("track_tag",id);
+              
+              // set css class no-bullets
+              download_item.className = "no-bullets";
+  
+              download_list.appendChild(download_item);
+              // every 5 seconds, check download status
+              var STATUS_URL = DOWNLOAD_API+"/status?id="+id;
+              // get download_status_span by track_tag and class
+              var download_status_span = document.querySelector('[track_tag="'+id+'"] .track-status');
+              var download_name = document.querySelector('[track_tag="'+id+'"] .track-name');
+              var download_album = document.querySelector('[track_tag="'+id+'"] .track-album');
+              var download_img = document.querySelector('[track_tag="'+id+'"] .track-img');
+              var download_size = document.querySelector('[track_tag="'+id+'"] .track-size');
+              // set text content to song name and album name
+              
+              download_name.innerHTML= results_objects[id].track.name;
+              download_status_span.innerHTML = data.status;
+              download_album.innerHTML = results_objects[id].track.album.name;
+              download_img.setAttribute("src",results_objects[id].track.image[2].link);
+              
+              // change mpopupLink background and border color to green and back to blue after 1 second
+              var float_tap = document.getElementById('mpopupLink');
+              float_tap.style.backgroundColor = "green";
+              float_tap.style.borderColor = "green";
+  
+              setTimeout(function() {
+                  float_tap.style.backgroundColor = "#007bff";
+                  float_tap.style.borderColor = "#007bff";
+              }, 1000);
+              
+              // check status every 5 seconds
+              var interval = setInterval(function() {
+                  fetch(STATUS_URL)
+                  .then(response => response.json())
+                  .then(data => {
+                      if (data.status) {
+                          // update status
+                          download_status_span.textContent = data.status;
+                          if(data.size) {
+                              download_size.textContent = "Size: "+data.size;
+                          }
+                          if (data.status == "Done") {
+                              // download complete, add download button
+                              download_status_span.innerHTML = `<a href="${DOWNLOAD_API}${data.url}" target="_blank">Download MP3</a>`;
+                              // clear interval
+                              clearInterval(interval);
+                              return;
+                    }}
+                });}, 3000); // end interval
+          } });}
+
+          var results_container = document.querySelector("#saavn-results")
+var results_objects = {};
+const searchUrl = "https://jiosaavn-api-privatecvc2.vercel.app/search/songs?query=";
+function SaavnSearch() {
+event.preventDefault(); // stop page changing to #, which will reload the page
+var query = document.querySelector("#saavn-search-box").value.trim()
+query = encodeURIComponent(query);
+
+if(query==lastSearch) {doSaavnSearch(query)}
+    window.location.hash = lastSearch; 
+if(query.length > 0) { 
+    window.location.hash = query 
+}
+
+}
+var page_index = 1;
+function nextPage() {
+    var query = document.querySelector("#saavn-search-box").value.trim();
+    if (!query) {query = lastSearch;}
+    query = encodeURIComponent(query);
+    doSaavnSearch(query,0,true)
+}
+async function doSaavnSearch(query,NotScroll,page) {
+    window.location.hash = query;
+    document.querySelector("#saavn-search-box").value = decodeURIComponent(query);
+    if(!query) {return 0;}
+results_container.innerHTML = `<span class="loader">Searching</span>`;
+    query=query+"&limit=40";
+    if(page) {
+        ;page_index=page_index+1;query=query+"&page="+page_index;
+    } else {query=query+"&page=1";page_index=1;}
+    
+// try catch
+try {
+var response = await fetch(searchUrl + query);
+} catch(error) {
+results_container.innerHTML = `<span class="error">Error: ${error} <br> Check if API is down </span>`;
+}
+var json = await response.json();
+/* If response code isn't 200, display error*/
+if (response.status !== 200) {
+    results_container.innerHTML = `<span class="error">Error: ${json.message}</span>`;
+    console.log(response)
+    return 0;
+}
+var json = json.data.results;
+var results = [];
+if(!json) {results_container.innerHTML = "<p> No result found. Try other Library </p>";return;}
+lastSearch = decodeURI(window.location.hash.substring(1));
+for(let track of json) {
+
+
+song_name = TextAbstract(track.name,25);
+album_name = TextAbstract(track.album.name,20);
+if (track.album.name == track.name) {
+    album_name = ""
+}
+var measuredTime = new Date(null);
+measuredTime.setSeconds(track.duration); // specify value of SECONDS
+var play_time = measuredTime.toISOString().substr(11, 8);
+if (play_time.startsWith("00:0")) {
+    play_time = play_time.slice(4);
+}
+if (play_time.startsWith("00:")) {
+    play_time = play_time.slice(3);
+}
+var song_id = track.id;
+var year = track.year;
+var song_image = track.image[1].link;
+var song_artist = TextAbstract(track.primaryArtists,30);
+var bitrate = document.getElementById('saavn-bitrate');
+var bitrate_i = bitrate.options[bitrate.selectedIndex].value;
+if(track.downloadUrl) {
+var download_url = track.downloadUrl[bitrate_i]['link'];
+var quality = "";
+if (bitrate_i == 4) {quality = 320} else {quality = 160;}
+    // push object to results array
+    results_objects[song_id] = {
+        track: track
+    };
+      results.push(`
+      <div class="text-left song-container" style="margin-bottom:20px;border-radius:10px;background-color:#1c1c1c;padding:10px;">
+      <div class="row" style="margin:auto;">
+          <div class="col-auto" style="padding:0px;padding-right:0px;border-style:none;">
+              <img id="${song_id}-i" class="img-fluid d-inline" style="width:115px;border-radius:5px;height:115px;padding-right:10px;" src="${song_image}" loading="lazy"/>
+          </div>
+          <div class="col" style="border-style:none;padding:2px;">
+              <p class="float-right fit-content" style="margin:0px;color:#fff;padding-right:10px;">${year}</p>
+              <p id="${song_id}-n" class="fit-content" style="margin:0px;color:#fff;max-width:100%;">${song_name}</p>
+              <p id="${song_id}-a" class="fit-content" style="margin:0px;color:#fff;max-width:100%;">${album_name}<br/></p>
+              <p id="${song_id}-ar" class="fit-content" style="margin:0px;color:#fff;max-width:100%;">${song_artist}<br/></p>
+              <button class="btn btn-primary song-btn" type="button" style="margin:0px 2px;" onclick='PlayAudio("${download_url}","${song_id}")'>▶</button>
+              <button class="btn btn-primary song-btn" type="button" style="margin:0px 2px;" onclick='AddDownload("${song_id}")'>DL</button>
+              <p class="float-right fit-content" style="margin:0px;color:#fff;padding-right:10px;padding-top:15px;">${play_time}<br/></p>
+          </div>
+      </div>
+  </div>
+`
+); }
+    }
+    
+    results_container.innerHTML = results.join(' ');
+    if(!NotScroll){
+    document.getElementById("saavn-results").scrollIntoView();
+    }
+
+
+}
+function TextAbstract(text, length) {
+    if (text == null) {
+        return "";
+    }
+    if (text.length <= length) {
+        return text;
+    }
+    text = text.substring(0, length);
+    last = text.lastIndexOf(" ");
+    text = text.substring(0, last);
+    return text + "...";
+}
+if(window.location.hash) {
+   doSaavnSearch(window.location.hash.substring(1));
+} else {doSaavnSearch('english',1);}
+
+addEventListener('hashchange', event => { });
+onhashchange = event => {doSaavnSearch(window.location.hash.substring(1))};
+
+// If Bitrate changes, search again
+$('#saavn-bitrate').on('change', function () {
+    doSaavnSearch(lastSearch);
+        /*
+    var isDirty = !this.options[this.selectedIndex].defaultSelected;
+
+    if (isDirty) {
+        // Value Changed
+        doSaavnSearch(lastSearch)
+    } else {
+        // Do Nothing
+    } */
+});
+document.getElementById("loadmore").addEventListener('click',nextPage)
+
+
+    </script>
+</body>
+
+ion 1.2</h6>
+    </div>
+    </div>
+    
+  </body>
+</html>

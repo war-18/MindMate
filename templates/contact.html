@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      MindMate - Contact Us
+    </title>
+    <style>
+      /* General styles */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-image: url("https://thedailyguardian.com/wp-content/uploads/2020/09/Mental-health.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        color: white;
+      }
+
+      /* Navbar styles */
+      .navbar {
+        background-color: #333;
+        padding: 10px 0;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .navbar-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .navbar-brand {
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+        text-decoration: none;
+      }
+
+      .navbar-menu {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+      }
+
+      .navbar-menu li {
+        margin-left: 20px;
+        position: relative;
+      }
+
+      .navbar-menu a {
+        color: white;
+        text-decoration: none;
+        padding: 10px 15px;
+        display: block;
+      }
+
+      .navbar-menu .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #333;
+        min-width: 200px;
+        z-index: 1000;
+      }
+
+      .navbar-menu .dropdown-content a {
+        color: white;
+        padding: 10px 15px;
+        display: block;
+        text-decoration: none;
+      }
+
+      .navbar-menu .dropdown:hover .dropdown-content {
+        display: block;
+      }
+
+      /* Container styles */
+      .container {
+        max-width: 800px;
+        margin: 150px auto;
+        padding: 20px;
+        background-color: rgba(0, 0, 0, 0.7);
+        border-radius: 10px;
+        text-align: center;
+      }
+
+      /* Heading styles */
+      h1 {
+        font-size: 36px;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        color: #fff; /* White text color */
+      }
+
+      p {
+        font-size: 20px;
+        margin-bottom: 30px;
+        color: #ddd; /* Light gray text color */
+      }
+
+      /* Button styles */
+      .button {
+        display: inline-block;
+        padding: 10px 20px;
+        margin: 10px;
+        background-color: #4caf50;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 20px;
+        transition: background-color 0.3s;
+      }
+
+      .button:hover {
+        background-color: #45a049;
+      }
+
+      /* Map container styles */
+      .map-container {
+        height: 400px; /* Adjust height as needed */
+        margin-bottom: 20px;
+        position: relative;
+        border-radius: 10px;
+        overflow: hidden; /* Hide overflow to prevent map iframe from stretching beyond container */
+      }
+
+      /* Contact information styles */
+      .contact-info {
+        text-align: center;
+        color: #fff; /* White text color */
+      }
+
+      /* Footer styles */
+      footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+<div class="navbar">
+    <div class="navbar-container">
+      <a href="/" class="navbar-brand">MindMate</a>
+      <ul class="navbar-menu">
+        <li class="dropdown">
+          <a href="#" class="nav-link">Services</a>
+          <div class="dropdown-content">
+            <a href="/chatbot">Chat with MindMate</a>
+            <a href="/depression_calculator">Take the Quiz</a>
+            <a href="/music">Free with music</a>
+            <a href="/indexofsucide">Suicide Analysis</a>
+            <a href="/therapists">Therapists</a>
+            <a href="/videos">Motivate</a>
+          </div>
+        </li>
+        <li><a href="/about" class="nav-link">About</a></li>
+        <li><a href="/team" class="nav-link">Team</a></li>
+        <li><a href="/contact" class="nav-link">Contact Us</a></li>
+      </ul>
+    </div>
+  </div>
+  
+
+    <!-- Contact Us Content -->
+    <div class="container">
+      <h1>Contact Us</h1>
+
+      <!-- Map container with iframe -->
+      <div class="map-container">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3781.9844658630866!2d73.7431379144453!3d18.65091838734649!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2ba0236e62d6d%3A0xaf82683765815de9!2sPimpri%20Chinchwad%20College%20Of%20Engineering%20%26%20Research!5e0!3m2!1sen!2sin!4v1619057491530!5m2!1sen!2sin"
+          width="100%"
+          height="100%"
+          style="border: 0"
+          allowfullscreen=""
+          loading="lazy"
+        ></iframe>
+      </div>
+
+      <!-- Contact information -->
+      <div class="contact-info">
+        <p>Pimpri Chinchwad College of Engineering and Research (PCCOE&R)</p>
+        <p>
+          Address: Plot No. B, Sector no. 110, Gate no.1, Laxminagar, Ravet,
+          Haveli, Pune - 412101
+        </p>
+        <p>Phone: 8237238080</p>
+        <p>Email: pccoer.ravet@gmail.com</p>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2024 MindMate. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

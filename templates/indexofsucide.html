@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MindMate - Text Suicide Analysis</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    />
+    <style>
+      body {
+        background-image: url("https://images.squarespace-cdn.com/content/v1/5e9e74aea07dbc6724a2189e/79e69ad1-9232-4194-ab3a-a9861ec4ef78/damir-samatkulov-x7JIZ8XEyGM-unsplash.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        padding: 20px;
+        text-align: center;
+      }
+      h1,
+      p {
+        color: #eee; /* Light color for text */
+        margin-bottom: 20px;
+      }
+      input[type="text"] {
+        width: 60%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      input[type="submit"] {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      input[type="submit"]:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Suicide Analysis</h1>
+    <p>
+      Enter text below to see whether the text you have entered is suicidal or
+      not.
+    </p>
+    <form action="/predict" method="post">
+      <input type="text" name="user_text" />
+      <input type="submit" value="Submit" />
+    </form>
+  </body>
+</html>
