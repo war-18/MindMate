@@ -145,7 +145,7 @@ def get_response():
             return jsonify({"response": response})
 
 # Depression calculator result route
-@app.route('/result', methods=['POST'])
+@app.route('/result_depressionCalci', methods=['POST'])
 def result():
     if request.method=='POST':
         umur = request.form['umur']
@@ -158,7 +158,7 @@ def result():
         lvq.normalize()
         lvq.train()
         lvq.test()
-        return render_template('result.html', lvq=lvq)
+        return render_template('result_depressionCalci.html', lvq=lvq)
     return render_template('depression_calculator.html')
 
 # Suicide prediction route
